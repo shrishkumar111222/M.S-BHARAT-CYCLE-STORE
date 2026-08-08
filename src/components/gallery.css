@@ -1,0 +1,251 @@
+/* ============================================================
+   Gallery — CSS-columns masonry + lightbox
+   ============================================================ */
+
+.gallery {
+  background: var(--ink-900);
+}
+
+.masonry {
+  columns: 1;
+  column-gap: 1rem;
+}
+
+.masonry__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  border: 1px solid var(--glass-line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: border-color var(--t-fast) linear, box-shadow var(--t-mid) var(--ease-out),
+    transform var(--t-mid) var(--ease-out);
+}
+
+.masonry__item:hover {
+  transform: translateY(-4px);
+  border-color: var(--glass-line-hi);
+  box-shadow: var(--shadow-lg);
+}
+
+.masonry__item .photo {
+  height: 100%;
+}
+
+/* Aspect ratios staggered so the masonry actually looks like masonry */
+.masonry__item[data-ratio='tall'] .photo {
+  aspect-ratio: 3 / 4;
+}
+.masonry__item[data-ratio='wide'] .photo {
+  aspect-ratio: 3 / 2;
+}
+.masonry__item[data-ratio='square'] .photo {
+  aspect-ratio: 1;
+}
+
+.masonry__caption {
+  position: absolute;
+  z-index: 4;
+  inset: auto 0 0;
+  padding: 2.5rem 1.1rem 1.1rem;
+  background: linear-gradient(transparent, rgba(4, 5, 10, 0.88));
+  color: var(--text-hi);
+  font-size: var(--f-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transform: translateY(8px);
+  opacity: 0;
+  transition: opacity var(--t-mid) var(--ease-out), transform var(--t-mid) var(--ease-out);
+}
+
+.masonry__item:hover .masonry__caption,
+.masonry__item:focus-visible .masonry__caption {
+  opacity: 1;
+  transform: none;
+}
+
+/* Zoom glyph */
+.masonry__zoom {
+  position: absolute;
+  z-index: 4;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-line-hi);
+  border-radius: 50%;
+  background: rgba(4, 5, 10, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-hi);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity var(--t-mid) linear, transform var(--t-mid) var(--ease-spring);
+}
+
+.masonry__item:hover .masonry__zoom {
+  opacity: 1;
+  transform: none;
+}
+
+.masonry__zoom svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Lightbox ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+  padding: 1rem var(--gutter) 1.5rem;
+  background: rgba(3, 4, 8, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--t-mid) var(--ease-out), visibility var(--t-mid) linear;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--text-low);
+  font-size: var(--f-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.lightbox__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+
+.lightbox__frame {
+  width: min(72rem, 100%);
+  height: 100%;
+  max-height: 100%;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--glass-line);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: transform var(--t-mid) var(--ease-spring), opacity var(--t-mid) linear;
+}
+
+.lightbox.is-open .lightbox__frame {
+  transform: none;
+  opacity: 1;
+}
+
+.lightbox__frame .photo {
+  height: 100%;
+}
+
+.lightbox__frame .photo__img,
+.lightbox__frame .photo__art {
+  object-fit: contain;
+  background: var(--ink-850);
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-line-hi);
+  border-radius: 50%;
+  background: rgba(9, 11, 18, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-hi);
+  transition: background-color var(--t-fast) linear, transform var(--t-fast) var(--ease-out);
+}
+
+.lightbox__nav:hover {
+  background: var(--blue-600);
+}
+
+.lightbox__nav--prev {
+  left: 0;
+}
+.lightbox__nav--next {
+  right: 0;
+}
+.lightbox__nav--prev:hover {
+  transform: translateY(-50%) translateX(-3px);
+}
+.lightbox__nav--next:hover {
+  transform: translateY(-50%) translateX(3px);
+}
+
+.lightbox__nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lightbox__caption {
+  text-align: center;
+  color: var(--text-mid);
+  font-size: var(--f-sm);
+}
+
+.lightbox__close {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-line-hi);
+  border-radius: 50%;
+  color: var(--text-hi);
+  transition: background-color var(--t-fast) linear, transform var(--t-fast) var(--ease-out);
+}
+
+.lightbox__close:hover {
+  background: var(--blue-600);
+  transform: rotate(90deg);
+}
+
+@media (min-width: 640px) {
+  .masonry {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry {
+    columns: 3;
+    column-gap: 1.25rem;
+  }
+  .masonry__item {
+    margin-bottom: 1.25rem;
+  }
+  .lightbox__nav--prev {
+    left: 1.5rem;
+  }
+  .lightbox__nav--next {
+    right: 1.5rem;
+  }
+}

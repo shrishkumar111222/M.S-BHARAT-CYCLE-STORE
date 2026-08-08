@@ -1,0 +1,100 @@
+/* ============================================================
+   Photo slot.
+   Every image on the site is a .photo. It renders vector artwork
+   until a real photograph with the matching filename exists in
+   public/images/ — then src/scripts/photos.js fades the real one in.
+   See public/images/PHOTO-GUIDE.md.
+   ============================================================ */
+
+.photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink-800);
+  isolation: isolate;
+}
+
+/* Vector stand-in — sized to fill, never distorted */
+.photo__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--t-slow) var(--ease-out);
+}
+
+.photo__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 900ms var(--ease-out), transform 1.4s var(--ease-out);
+}
+
+.photo.has-photo .photo__img {
+  opacity: 1;
+  transform: none;
+}
+
+.photo.has-photo .photo__art {
+  opacity: 0;
+}
+
+/* A faint grain + vignette makes the vector art read as photography
+   rather than as flat illustration. */
+.photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 90% at 50% 30%,
+    transparent 40%,
+    rgba(4, 5, 10, 0.55) 100%
+  );
+}
+
+/* The small "add your photo" hint, only on placeholder slots */
+.photo__hint {
+  position: absolute;
+  z-index: 3;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--glass-line);
+  border-radius: var(--r-pill);
+  background: rgba(4, 5, 10, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text-low);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity var(--t-mid) linear;
+}
+
+/* Only surfaces on hover, so it never spoils the first impression */
+.photo:hover .photo__hint {
+  opacity: 1;
+}
+
+.photo.has-photo .photo__hint {
+  display: none;
+}
+
+/* Zoom-on-hover wrapper used by gallery + product cards */
+.photo--zoom .photo__img,
+.photo--zoom .photo__art {
+  transition: transform 900ms var(--ease-out), opacity var(--t-slow) var(--ease-out);
+}
+
+.photo--zoom:hover .photo__img,
+.photo--zoom:hover .photo__art {
+  transform: scale(1.08);
+}

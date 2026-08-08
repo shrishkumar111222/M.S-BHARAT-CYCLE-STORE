@@ -1,0 +1,132 @@
+/* ============================================================
+   Why Choose Us — bento grid of glass feature cards
+   ============================================================ */
+
+.features {
+  background: linear-gradient(180deg, var(--ink-900), var(--ink-850) 60%, var(--ink-900));
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.feature {
+  position: relative;
+  padding: 1.75rem;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: transform var(--t-mid) var(--ease-out),
+    border-color var(--t-mid) linear, box-shadow var(--t-mid) var(--ease-out);
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+  border-color: var(--glass-line-hi);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Cursor-tracking glow, coordinates set by src/scripts/spotlight.js */
+.feature::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(46, 155, 255, 0.16),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity var(--t-mid) linear;
+  pointer-events: none;
+}
+
+.feature:hover::after {
+  opacity: 1;
+}
+
+.feature__icon {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.35rem;
+  border: 1px solid var(--glass-line);
+  border-radius: 14px;
+  background: linear-gradient(
+    140deg,
+    rgba(46, 155, 255, 0.2),
+    rgba(46, 155, 255, 0.03)
+  );
+  transition: transform var(--t-mid) var(--ease-spring),
+    box-shadow var(--t-mid) var(--ease-out);
+}
+
+.feature:hover .feature__icon {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: var(--shadow-blue);
+}
+
+.feature__icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--blue-400);
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feature h3 {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0.6rem;
+}
+
+.feature p {
+  position: relative;
+  z-index: 1;
+  font-size: var(--f-sm);
+  color: var(--text-mid);
+}
+
+/* Wide card that carries the shop-owner photo */
+.feature--wide {
+  grid-column: span 1;
+  display: grid;
+  gap: 1.75rem;
+  padding: 0;
+  align-items: stretch;
+}
+
+.feature--wide .feature__body {
+  padding: 1.75rem;
+}
+
+.feature--wide .photo {
+  min-height: 230px;
+  border-radius: var(--r-lg);
+}
+
+@media (min-width: 900px) {
+  .features__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .feature--wide {
+    grid-column: span 2;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 0;
+  }
+  .feature--wide .photo {
+    border-radius: 0 var(--r-lg) var(--r-lg) 0;
+    min-height: 100%;
+  }
+  .feature--wide .feature__body {
+    padding: 2.25rem;
+    align-self: center;
+  }
+}

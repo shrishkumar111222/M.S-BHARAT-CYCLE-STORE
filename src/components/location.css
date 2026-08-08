@@ -1,0 +1,215 @@
+/* ============================================================
+   Store location — map embed, hours, live open/closed badge
+   ============================================================ */
+
+.location {
+  background: var(--ink-900);
+}
+
+.location__layout {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* ---------- Map ---------- */
+
+.map {
+  position: relative;
+  min-height: 22rem;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  border: 1px solid var(--glass-line);
+  background: var(--ink-800);
+}
+
+.map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  /* The Google embed is bright white — grade it into the dark theme
+     without hurting legibility. */
+  filter: invert(92%) hue-rotate(185deg) saturate(0.7) brightness(0.95)
+    contrast(0.9);
+}
+
+/* Click-to-load shade: keeps the third-party iframe out of the
+   critical path so Lighthouse stays green. */
+.map__consent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(160deg, var(--ink-700), var(--ink-850));
+  transition: opacity var(--t-mid) linear, visibility var(--t-mid) linear;
+}
+
+.map.is-loaded .map__consent {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.map__consent p {
+  max-width: 22rem;
+  font-size: var(--f-sm);
+}
+
+.map__pin {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--grad-blue);
+  box-shadow: var(--shadow-blue);
+  animation: pin-pulse 2.6s var(--ease-in-out) infinite;
+}
+
+.map__pin svg {
+  width: 26px;
+  height: 26px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 1.7;
+}
+
+@keyframes pin-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(46, 155, 255, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 22px rgba(46, 155, 255, 0);
+  }
+}
+
+/* ---------- Info panel ---------- */
+
+.location__panel {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: var(--r-xl);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--glass-line);
+  background: var(--glass-bg);
+  font-size: var(--f-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  justify-self: start;
+}
+
+.status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-low);
+}
+
+.status.is-open {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.3);
+}
+.status.is-open .status__dot {
+  background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+  animation: pin-pulse 2.2s var(--ease-in-out) infinite;
+}
+
+.status.is-closed {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.3);
+}
+.status.is-closed .status__dot {
+  background: #f87171;
+}
+
+.address {
+  font-style: normal;
+  color: var(--text-mid);
+  font-size: var(--f-lead);
+  line-height: 1.6;
+}
+
+.address strong {
+  display: block;
+  font-size: 1.15rem;
+  margin-bottom: 0.35rem;
+}
+
+/* ---------- Hours table ---------- */
+
+.hours {
+  list-style: none;
+  border-top: 1px solid var(--glass-line);
+}
+
+.hours li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--glass-line);
+  font-size: var(--f-sm);
+}
+
+.hours li.is-today {
+  color: var(--blue-400);
+}
+
+.hours li.is-today .hours__days::after {
+  content: 'Today';
+  margin-left: 0.6rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--r-pill);
+  background: rgba(46, 155, 255, 0.16);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.hours__time {
+  color: var(--text-hi);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.location__actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+}
+
+@media (min-width: 520px) {
+  .location__actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 980px) {
+  .location__layout {
+    grid-template-columns: 1.35fr 1fr;
+  }
+  .map {
+    min-height: 32rem;
+  }
+}
