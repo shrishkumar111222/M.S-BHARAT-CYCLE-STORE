@@ -259,7 +259,7 @@ export const STATS = [
 ];
 
 export const GALLERY = [
-  { photo: 'gallery-1.jpg', art: 'shopfront', ratio: 'wide', caption: 'The shop on the main road, Sherghati' },
+  { photo: 'gallery-1.jpg', art: 'storefront', ratio: 'wide', caption: 'The shop on the main road, Sherghati' },
   { photo: 'gallery-2.jpg', art: 'showroom', ratio: 'tall', caption: 'Showroom floor — new arrivals' },
   { photo: 'gallery-3.jpg', art: 'workshop', ratio: 'square', caption: 'The repair workshop' },
   { photo: 'gallery-4.jpg', art: 'parts', ratio: 'wide', caption: 'Genuine spare parts counter' },

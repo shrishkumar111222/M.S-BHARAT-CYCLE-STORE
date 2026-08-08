@@ -14,28 +14,45 @@ webfont, which you can self-host to remove even that).
 
 **The site currently shows vector artwork, not photographs of the shop.**
 
-The build environment could not reach Google — `google.com/maps`,
-`lh3.googleusercontent.com` (where Business Profile photos are served) and the
-Indian directory sites are all blocked by the network proxy, and the Places API
-route needs an API key that wasn't available. Rather than invent a storefront
-image, every photo slot renders hand-drawn artwork and is wired to accept the
-real photograph.
+Two separate reasons:
 
-There are three ways to put the real photos in. Any of them works.
+1. **The Google Business Profile has no photos published on it.** Nothing can be
+   imported that isn't there — the Places API only returns photos that exist on
+   the listing.
+2. This build environment is blocked from reaching Google at all
+   (`google.com/maps` and `lh3.googleusercontent.com` return 403 at the egress
+   proxy), so even Street View was unavailable.
 
-### Option A — let GitHub fetch them (no terminal needed)
+Rather than invent a storefront image, every photo slot renders artwork and is
+wired to accept the real photograph the moment one exists.
 
-GitHub's runners can reach Google even though the build environment could not.
+### The path that actually works: photograph the shop
 
-1. Get a Google Maps API key (see Option B for the three-step setup).
+**→ [`public/images/SHOT-LIST.md`](public/images/SHOT-LIST.md)** is a shot list
+you can hand to the owner. Phone camera, about twenty minutes, framing notes for
+each shot. Business Profile photos would have been phone photos anyway — usually
+worse ones, since nobody tidies the shop first.
+
+Five photos carry the whole site: the storefront, one interior, the workshop,
+the owner at work, and a wide crop of the storefront for link previews. Drop
+them into `public/images/` and run `npm run build`.
+
+### If photos get added to the Business Profile later
+
+Two ways to import them automatically.
+
+**Via GitHub, no terminal needed.** GitHub's runners can reach Google even
+though this build environment could not.
+
+1. Get a Google Maps API key (see below for the three-step setup).
 2. This repo → **Settings → Secrets and variables → Actions → New repository
    secret**. Name it `GOOGLE_MAPS_API_KEY`, paste the key.
 3. **Actions → "Fetch real Google Business photos" → Run workflow.**
 
-It downloads the shop's published Business Profile photos, rebuilds the site
-with them baked in, and commits them. The run summary lists every file it got.
+It downloads whatever the listing has, rebuilds with the photos baked in, and
+commits them. The run summary lists every file it got.
 
-### Option B — automatic, from your own machine
+**Or from your own machine:**
 
 ```bash
 # One-time: console.cloud.google.com → new project
@@ -53,13 +70,11 @@ can correct `src/scripts/config.js` from real data.
 Place Photos requests are billed per call; one run is a couple of dozen calls,
 well inside Google's free monthly credit.
 
-### Option C — manual
+### Filenames and sizes
 
-Download the photos from the Business Profile and save them into
-`public/images/` using the filenames in
-[`public/images/PHOTO-GUIDE.md`](public/images/PHOTO-GUIDE.md), then
-`npm run build`. The storefront photo goes in as `storefront.jpg` — it becomes
-the hero background.
+[`public/images/PHOTO-GUIDE.md`](public/images/PHOTO-GUIDE.md) lists every slot,
+the filename it expects, the ideal pixel size and how to compress before
+committing. `storefront.jpg` is the hero background and matters most.
 
 ### How the slots behave
 

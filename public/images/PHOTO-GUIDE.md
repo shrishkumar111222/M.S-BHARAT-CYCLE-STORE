@@ -39,11 +39,13 @@ Save as `.jpg` (or change the extension in the `data-photo` attribute).
 
 ## Getting the photos
 
-1. Open the Google Business Profile listing for the shop.
-2. **Photos → download** each image at full resolution (the owner can do this
-   from the Business Profile manager; visitor-uploaded photos belong to their
-   uploader, so prefer photos the business posted itself).
-3. Rename them per the table above and drop them in this folder.
+The Business Profile currently has none published, so they need to be taken at
+the shop. **[SHOT-LIST.md](SHOT-LIST.md)** has the full brief — what to shoot,
+how to frame it, and what to tidy first.
+
+If photos are added to the Business Profile later, `npm run photos` (or the
+"Fetch real Google Business photos" GitHub Action) will import them
+automatically under the filenames above.
 
 ## Compressing before you commit
 
