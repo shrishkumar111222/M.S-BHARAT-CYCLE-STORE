@@ -1,0 +1,273 @@
+/* ============================================================
+   Sticky glass header + full-screen mobile menu
+   ============================================================ */
+
+/* Sits above the mobile menu overlay so the wordmark and close button stay
+   crisp instead of being blurred by the overlay behind them. */
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: calc(var(--z-menu) + 1);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--t-mid) var(--ease-out),
+    border-color var(--t-mid) linear, backdrop-filter var(--t-mid) linear,
+    transform var(--t-mid) var(--ease-out);
+}
+
+.header.is-stuck {
+  background: rgba(6, 8, 14, 0.72);
+  border-bottom-color: var(--glass-line);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+/* Hide on scroll-down, reveal on scroll-up */
+.header.is-hidden {
+  transform: translateY(-102%);
+}
+
+.header__inner {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ---------- Wordmark ---------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: auto;
+}
+
+.brand__mark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 12px;
+  background: var(--grad-blue);
+  box-shadow: var(--shadow-blue);
+  display: grid;
+  place-items: center;
+  transition: transform var(--t-mid) var(--ease-spring);
+}
+
+.brand:hover .brand__mark {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.brand__mark svg {
+  width: 24px;
+  height: 24px;
+  stroke: #fff;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand__name {
+  color: var(--text-hi);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.brand__sub {
+  color: var(--text-low);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ---------- Desktop nav ---------- */
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.3rem;
+  border: 1px solid var(--glass-line);
+  border-radius: var(--r-pill);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.nav__link {
+  position: relative;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--r-pill);
+  color: var(--text-mid);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color var(--t-fast) linear;
+}
+
+.nav__link:hover,
+.nav__link.is-active {
+  color: var(--text-hi);
+}
+
+/* Sliding pill that follows the active link */
+.nav__pill {
+  position: absolute;
+  z-index: -1;
+  top: 0.3rem;
+  height: calc(100% - 0.6rem);
+  border-radius: var(--r-pill);
+  background: var(--glass-bg-hi);
+  border: 1px solid var(--glass-line);
+  opacity: 0;
+  transition: transform var(--t-mid) var(--ease-out),
+    width var(--t-mid) var(--ease-out), opacity var(--t-fast) linear;
+}
+
+.header__cta {
+  display: none;
+}
+
+/* ---------- Burger ---------- */
+
+.burger {
+  position: relative;
+  z-index: calc(var(--z-menu) + 1);
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-line);
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.burger__box {
+  display: grid;
+  gap: 5px;
+  width: 18px;
+}
+
+.burger__box span {
+  display: block;
+  height: 1.5px;
+  background: var(--text-hi);
+  border-radius: 2px;
+  transition: transform var(--t-mid) var(--ease-spring),
+    opacity var(--t-fast) linear, width var(--t-mid) var(--ease-out);
+}
+
+.burger__box span:nth-child(2) {
+  width: 12px;
+  justify-self: end;
+}
+
+.burger[aria-expanded='true'] .burger__box span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.burger[aria-expanded='true'] .burger__box span:nth-child(2) {
+  opacity: 0;
+}
+.burger[aria-expanded='true'] .burger__box span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ---------- Mobile menu ---------- */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  display: grid;
+  align-content: center;
+  padding: calc(var(--header-h) + 2rem) var(--gutter) 2rem;
+  background: rgba(4, 5, 10, 0.86);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--t-mid) var(--ease-out),
+    visibility var(--t-mid) linear;
+}
+
+.menu.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu__list {
+  display: grid;
+  gap: 0.35rem;
+  list-style: none;
+  max-width: 30rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.menu__link {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--glass-line);
+  color: var(--text-hi);
+  font-size: clamp(1.5rem, 7vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out),
+    color var(--t-fast) linear;
+}
+
+.menu.is-open .menu__link {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(60ms * var(--i, 0) + 90ms);
+}
+
+.menu__link:hover {
+  color: var(--blue-500);
+}
+
+.menu__link span {
+  color: var(--blue-600);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.menu__actions {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 30rem;
+  width: 100%;
+  margin: 2.25rem auto 0;
+}
+
+@media (min-width: 980px) {
+  .nav {
+    display: flex;
+  }
+  .header__cta {
+    display: inline-flex;
+  }
+  .burger {
+    display: none;
+  }
+  .menu {
+    display: none;
+  }
+}

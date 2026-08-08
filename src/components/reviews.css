@@ -1,0 +1,208 @@
+/* ============================================================
+   Reviews — draggable snap carousel of glass testimonial cards
+   ============================================================ */
+
+.reviews {
+  background: linear-gradient(180deg, var(--ink-850), var(--ink-900));
+  overflow: hidden;
+}
+
+.reviews__top {
+  display: grid;
+  gap: 1.75rem;
+  margin-bottom: clamp(2.25rem, 4vw, 3.25rem);
+}
+
+.reviews__score {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.1rem 1.4rem;
+  border-radius: var(--r-lg);
+}
+
+.reviews__score-num {
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-hi);
+}
+
+.reviews__score-meta .stars {
+  color: var(--amber);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.reviews__score-meta span {
+  display: block;
+  color: var(--text-low);
+  font-size: var(--f-xs);
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Rail ---------- */
+
+.rail {
+  display: flex;
+  gap: 1.15rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 1.5rem;
+  /* bleed to the viewport edge on mobile so cards peek */
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  cursor: grab;
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+.rail.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.review {
+  flex: none;
+  width: min(23rem, 82vw);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.75rem;
+  border-radius: var(--r-lg);
+  scroll-snap-align: start;
+  transition: transform var(--t-mid) var(--ease-out),
+    border-color var(--t-fast) linear, box-shadow var(--t-mid) var(--ease-out);
+}
+
+.review:hover {
+  transform: translateY(-5px);
+  border-color: var(--glass-line-hi);
+  box-shadow: var(--shadow-lg);
+}
+
+.review__quote {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  color: var(--text-mid);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.review__quote::before {
+  content: '“';
+  display: block;
+  margin-bottom: -0.35em;
+  color: var(--blue-600);
+  font-size: 3.4rem;
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.review__stars {
+  position: relative;
+  z-index: 1;
+  color: var(--amber);
+  letter-spacing: 0.14em;
+  font-size: 0.92rem;
+}
+
+.review__who {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--glass-line);
+}
+
+.review__avatar {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--grad-blue);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.review__name {
+  color: var(--text-hi);
+  font-size: var(--f-sm);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.review__when {
+  color: var(--text-low);
+  font-size: var(--f-xs);
+}
+
+.review__src {
+  margin-left: auto;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  opacity: 0.7;
+}
+
+/* ---------- Rail controls ---------- */
+
+.rail-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rail-nav button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-line);
+  border-radius: 50%;
+  background: var(--glass-bg);
+  color: var(--text-hi);
+  transition: background-color var(--t-fast) linear, border-color var(--t-fast) linear,
+    transform var(--t-fast) var(--ease-out), opacity var(--t-fast) linear;
+}
+
+.rail-nav button:hover:not(:disabled) {
+  background: var(--blue-600);
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+.rail-nav button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.rail-nav svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (min-width: 760px) {
+  .reviews__top {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+  .reviews__top .section-head {
+    margin-bottom: 0;
+  }
+  .reviews__aside {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}

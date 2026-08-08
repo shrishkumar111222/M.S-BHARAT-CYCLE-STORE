@@ -1,0 +1,99 @@
+/* ============================================================
+   Scroll-reveal + micro-animation utilities.
+   Driven by src/scripts/reveal.js (IntersectionObserver).
+   Replaces AOS with ~1KB and zero third-party requests.
+   ============================================================ */
+
+[data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity var(--t-slow) var(--ease-out),
+    transform var(--t-slow) var(--ease-out), filter var(--t-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal='up'] {
+  transform: translate3d(0, 42px, 0);
+}
+[data-reveal='down'] {
+  transform: translate3d(0, -32px, 0);
+}
+[data-reveal='left'] {
+  transform: translate3d(48px, 0, 0);
+}
+[data-reveal='right'] {
+  transform: translate3d(-48px, 0, 0);
+}
+[data-reveal='scale'] {
+  transform: scale(0.92);
+}
+[data-reveal='blur'] {
+  transform: translate3d(0, 26px, 0);
+  filter: blur(14px);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Image reveal — a blue curtain wipes away to expose the media */
+.img-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(120deg, var(--ink-800), var(--blue-700));
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 1s var(--ease-in-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  pointer-events: none;
+}
+
+.img-reveal.is-revealed::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+/* Line-by-line headline reveal (built by reveal.js) */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.line-mask > span {
+  display: block;
+  transform: translate3d(0, 108%, 0);
+  transition: transform 1.05s var(--ease-out);
+  transition-delay: var(--line-delay, 0ms);
+}
+
+.line-mask.is-revealed > span {
+  transform: none;
+}
+
+/* Counters hold their slot so numbers don't cause layout shift */
+[data-count] {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .line-mask > span {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .img-reveal::after {
+    display: none;
+  }
+}

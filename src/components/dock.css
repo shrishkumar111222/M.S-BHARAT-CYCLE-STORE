@@ -1,0 +1,205 @@
+/* ============================================================
+   Floating action dock — WhatsApp, Call, Back-to-top
+   ============================================================ */
+
+.dock {
+  position: fixed;
+  right: clamp(0.9rem, 3vw, 1.75rem);
+  bottom: clamp(0.9rem, 3vw, 1.75rem);
+  z-index: var(--z-dock);
+  display: grid;
+  gap: 0.65rem;
+  justify-items: end;
+}
+
+.dock__btn {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--glass-line-hi);
+  background: rgba(11, 14, 23, 0.72);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  color: var(--text-hi);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--t-mid) var(--ease-spring),
+    background-color var(--t-fast) linear, box-shadow var(--t-mid) var(--ease-out),
+    opacity var(--t-mid) linear, visibility var(--t-mid) linear;
+}
+
+.dock__btn:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.dock__btn svg {
+  width: 25px;
+  height: 25px;
+}
+
+/* WhatsApp */
+.dock__btn--wa {
+  background: #25d366;
+  border-color: transparent;
+  color: #05240f;
+  box-shadow: 0 10px 34px -6px rgba(37, 211, 102, 0.55);
+}
+.dock__btn--wa:hover {
+  box-shadow: 0 16px 44px -6px rgba(37, 211, 102, 0.7);
+}
+
+/* Call */
+.dock__btn--call {
+  background: var(--grad-blue);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: var(--shadow-blue);
+}
+
+/* Halo ping to draw the eye, twice then rest */
+.dock__btn--call::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--blue-500);
+  animation: halo 2.8s var(--ease-out) infinite;
+}
+
+@keyframes halo {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* Back to top — only after scrolling */
+.dock__btn--top {
+  width: 46px;
+  height: 46px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+}
+
+.dock.is-scrolled .dock__btn--top {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.dock__btn--top svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover label */
+.dock__label {
+  position: absolute;
+  right: calc(100% + 0.65rem);
+  top: 50%;
+  translate: 0 -50%;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--glass-line);
+  background: rgba(11, 14, 23, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-hi);
+  font-size: var(--f-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(6px);
+  transition: opacity var(--t-fast) linear, transform var(--t-fast) var(--ease-out);
+}
+
+.dock__btn:hover .dock__label {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Mobile sticky call bar ---------- */
+
+.callbar {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: var(--z-dock);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--glass-line);
+  border-top: 1px solid var(--glass-line);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transform: translateY(101%);
+  transition: transform var(--t-mid) var(--ease-out);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.callbar.is-visible {
+  transform: none;
+}
+
+.callbar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.95rem;
+  background: rgba(8, 10, 17, 0.92);
+  color: var(--text-hi);
+  font-size: var(--f-sm);
+  font-weight: 600;
+}
+
+.callbar a svg {
+  width: 18px;
+  height: 18px;
+}
+
+.callbar a:first-child {
+  color: #25d366;
+}
+.callbar a:last-child {
+  color: var(--blue-400);
+}
+
+/* On phones the call bar handles calling, so the dock keeps only
+   WhatsApp + back-to-top and floats above the bar. */
+@media (max-width: 719px) {
+  .dock {
+    bottom: calc(3.6rem + env(safe-area-inset-bottom));
+  }
+  .dock__btn--call {
+    display: none;
+  }
+}
+
+@media (min-width: 720px) {
+  .callbar {
+    display: none;
+  }
+}
+
+/* ---------- Scroll progress ---------- */
+
+/* Above the header, otherwise the header's glass fill hides it once stuck. */
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: calc(var(--z-menu) + 2);
+  height: 2px;
+  background: var(--grad-blue);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+  box-shadow: 0 0 12px var(--blue-glow);
+}

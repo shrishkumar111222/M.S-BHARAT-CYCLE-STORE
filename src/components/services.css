@@ -1,0 +1,193 @@
+/* ============================================================
+   Services — sticky workshop photo beside a numbered list
+   ============================================================ */
+
+.services {
+  position: relative;
+  background: linear-gradient(180deg, var(--ink-900), var(--ink-850));
+  overflow: hidden;
+}
+
+/* Big ghosted watermark, parallaxed */
+.services__watermark {
+  position: absolute;
+  top: 8%;
+  right: -4%;
+  z-index: 0;
+  font-size: clamp(7rem, 20vw, 18rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.018);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.services__layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.services__media {
+  position: relative;
+}
+
+.services__media .photo {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-xl);
+  border: 1px solid var(--glass-line);
+}
+
+/* Floating stat chip over the workshop photo */
+.services__chip {
+  position: absolute;
+  right: -0.5rem;
+  bottom: -1.25rem;
+  z-index: 4;
+  padding: 1.1rem 1.4rem;
+  border-radius: var(--r-md);
+  text-align: center;
+}
+
+.services__chip strong {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--blue-400);
+  line-height: 1;
+}
+
+.services__chip span {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-low);
+}
+
+/* ---------- Service rows ---------- */
+
+.service-list {
+  list-style: none;
+  border-top: 1px solid var(--glass-line);
+}
+
+.service {
+  border-bottom: 1px solid var(--glass-line);
+}
+
+.service__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+  padding: 1.35rem 0.5rem;
+  text-align: left;
+  transition: padding-inline var(--t-mid) var(--ease-out);
+}
+
+.service__row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-md);
+  background: linear-gradient(
+    90deg,
+    rgba(46, 155, 255, 0.09),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity var(--t-mid) linear;
+}
+
+.service:hover .service__row::before,
+.service.is-open .service__row::before {
+  opacity: 1;
+}
+
+.service:hover .service__row {
+  padding-inline: 1.1rem 1rem;
+}
+
+.service__num {
+  position: relative;
+  color: var(--text-low);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--t-fast) linear;
+}
+
+.service:hover .service__num,
+.service.is-open .service__num {
+  color: var(--blue-500);
+}
+
+.service__name {
+  position: relative;
+  color: var(--text-hi);
+  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.service__plus {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-line);
+  border-radius: 50%;
+  color: var(--text-mid);
+  transition: transform var(--t-mid) var(--ease-spring),
+    background-color var(--t-fast) linear, color var(--t-fast) linear,
+    border-color var(--t-fast) linear;
+}
+
+.service.is-open .service__plus {
+  transform: rotate(45deg);
+  background: var(--blue-600);
+  border-color: transparent;
+  color: #fff;
+}
+
+.service__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--t-mid) var(--ease-out);
+}
+
+.service.is-open .service__panel {
+  grid-template-rows: 1fr;
+}
+
+.service__panel > div {
+  overflow: hidden;
+}
+
+.service__panel p {
+  padding: 0 3rem 1.5rem 2.6rem;
+  font-size: var(--f-sm);
+  color: var(--text-mid);
+  max-width: 42rem;
+}
+
+@media (min-width: 940px) {
+  .services__layout {
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: start;
+  }
+  .services__media {
+    position: sticky;
+    top: calc(var(--header-h) + 3rem);
+  }
+}

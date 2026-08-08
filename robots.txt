@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shrishkumar111222.github.io/m.s-bharat-cycle-store/sitemap.xml
