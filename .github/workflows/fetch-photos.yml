@@ -1,0 +1,79 @@
+name: Fetch real Google Business photos
+
+# Run this from the Actions tab. GitHub's runners can reach the Google Places
+# API, so this downloads the shop's actual Business Profile photographs into
+# public/images/, rebuilds the site with them baked in, and commits the result.
+#
+# Setup (once):
+#   1. console.cloud.google.com → create a project
+#   2. APIs & Services → Library → enable "Places API"
+#   3. Credentials → Create credentials → API key
+#   4. This repo → Settings → Secrets and variables → Actions → New secret
+#      Name: GOOGLE_MAPS_API_KEY     Value: your key
+#
+# Then: Actions → "Fetch real Google Business photos" → Run workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: 'Commit the downloaded photos back to this branch'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check the API key is configured
+        run: |
+          if [ -z "${{ secrets.GOOGLE_MAPS_API_KEY }}" ]; then
+            echo "::error::GOOGLE_MAPS_API_KEY secret is not set."
+            echo "Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      - name: Download Business Profile photos
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: node build/fetch-google-photos.mjs
+
+      - name: Rebuild with the real photos
+        run: node build/build.mjs
+
+      - name: Show what was downloaded
+        run: |
+          echo "### Photos downloaded" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          ls -lh public/images/*.jpg 2>/dev/null || echo "none" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      # Photos are the deliverable here, so they are worth reviewing even if
+      # the commit step is skipped.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: google-business-photos
+          path: public/images/*.jpg
+          if-no-files-found: warn
+
+      - name: Commit
+        if: inputs.commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images index.html
+          if git diff --staged --quiet; then
+            echo "Nothing changed."
+          else
+            git commit -m "Add real Google Business Profile photographs"
+            git push
+          fi

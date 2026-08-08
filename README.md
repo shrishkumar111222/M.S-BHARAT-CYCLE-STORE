@@ -21,9 +21,21 @@ route needs an API key that wasn't available. Rather than invent a storefront
 image, every photo slot renders hand-drawn artwork and is wired to accept the
 real photograph.
 
-There are two ways to put the real photos in. Either works.
+There are three ways to put the real photos in. Any of them works.
 
-### Option A — automatic, via the Places API
+### Option A — let GitHub fetch them (no terminal needed)
+
+GitHub's runners can reach Google even though the build environment could not.
+
+1. Get a Google Maps API key (see Option B for the three-step setup).
+2. This repo → **Settings → Secrets and variables → Actions → New repository
+   secret**. Name it `GOOGLE_MAPS_API_KEY`, paste the key.
+3. **Actions → "Fetch real Google Business photos" → Run workflow.**
+
+It downloads the shop's published Business Profile photos, rebuilds the site
+with them baked in, and commits them. The run summary lists every file it got.
+
+### Option B — automatic, from your own machine
 
 ```bash
 # One-time: console.cloud.google.com → new project
@@ -41,7 +53,7 @@ can correct `src/scripts/config.js` from real data.
 Place Photos requests are billed per call; one run is a couple of dozen calls,
 well inside Google's free monthly credit.
 
-### Option B — manual
+### Option C — manual
 
 Download the photos from the Business Profile and save them into
 `public/images/` using the filenames in
@@ -64,18 +76,19 @@ changes.
 
 ## Before you show this to the client
 
-Three placeholders need real values. All three live in **one file**,
-`src/scripts/config.js`:
+The phone number is live: **+91 72773 43791**. It drives every call button,
+every WhatsApp link and the schema.org markup from a single place,
+`src/scripts/config.js`.
+
+One value in that file is still approximate:
 
 ```js
-phone: '+919999999999',        // ← the real number
-phoneDisplay: '+91 99999 99999',
-whatsapp: '919999999999',      // ← country code + number, no + or spaces
-lat: 24.5586, lng: 84.7896,    // ← the exact shop pin, not the town centre
+lat: 24.5586, lng: 84.7896,    // ← Sherghati town centre, not the shop's pin
 ```
 
-Every call button, WhatsApp link, directions link and the schema.org markup
-reads from that file, so changing it once updates the whole site.
+Open the shop in Google Maps, right-click its pin, copy the coordinates and
+paste them in. That corrects the "Get Directions" button, the map embed and the
+geo tags.
 
 Two more things worth doing:
 

@@ -6,10 +6,10 @@
 export const BUSINESS = {
   name: 'M.S BHARAT CYCLE STORE',
   tagline: "Sherghati's Trusted Bicycle Destination",
-  // TODO(owner): replace with the real number from the Google Business Profile.
-  phone: '+919999999999',
-  phoneDisplay: '+91 99999 99999',
-  whatsapp: '919999999999',
+  phone: '+917277343791',
+  phoneDisplay: '+91 72773 43791',
+  // Country code + number, no '+' and no spaces — wa.me link format.
+  whatsapp: '917277343791',
   street: 'Main Road, Sherghati',
   city: 'Sherghati',
   district: 'Gaya',
