@@ -9,13 +9,36 @@ photo into this folder using the filename in the first column, then rebuild
 | Save as | Which photo | Why |
 | --- | --- | --- |
 | `storefront.jpg` | **Night, landscape, wide — lit signboard, man seated inside, full cycle display across the front** | The hero. Landscape fits the full-bleed hero without cropping, the illuminated sign is the strongest brand moment the shop has, and the warm shelf lighting sits perfectly against the site's dark theme. |
-| `interior-1.jpg` | **Interior, landscape — lit shelving with ride-on jeeps and bikes above, row of cycles below** | Best interior shot by a distance. No people, clean lighting, and it shows the depth of stock in one frame. |
-| `gallery-1.jpg` | **Night, landscape, with red and white balloons** | Festive, well lit. Reads as a shop that celebrates openings and festivals. |
-| `gallery-2.jpg` | **Day, portrait, straight-on — sign filling the top, ride-ons lined up outside** | Cleanest daytime shot of the signboard. |
-| `gallery-3.jpg` | **Night, portrait — lit sign, cycles in the foreground** | Good vertical for the masonry column. |
-| `gallery-4.jpg` | **Day, portrait, wider angle — whole shop front with the kids' vehicles outside** | Shows the shop in its street context. |
+| `gallery-1.jpg` | **Interior, landscape — lit shelving with ride-on jeeps and bikes above, row of cycles below** | Best interior shot by a distance. No people, clean lighting, and it shows the depth of stock in one frame. |
+| `gallery-2.jpg` | **Night, landscape, with red and white balloons** | Festive, well lit. Reads as a shop that celebrates openings and festivals. |
+| `gallery-3.jpg` | **Day, portrait, straight-on — sign filling the top, ride-ons lined up outside** | Cleanest daytime shot of the signboard. |
+| `gallery-4.jpg` | **Night, portrait — lit sign, cycles in the foreground** | Good vertical for the masonry column. |
+| `gallery-6.jpg` | **Day, portrait, wider angle — whole shop front with the kids' vehicles outside** | Shows the shop in its street context. |
 | `product-rideon.jpg` | **Interior — red and blue ride-on jeeps with the light bars glowing** | The LED grilles read well as a product shot. Crop out the person standing at the right edge. |
-| `og-cover.jpg` | **Same night landscape as `storefront.jpg`, cropped to 1200×630** | This is the thumbnail when the link is shared on WhatsApp. It matters more than people expect. |
+| `og-cover.jpg` | **Same night landscape as `storefront.jpg`, cropped to 1200×630** | The thumbnail when the link is shared on WhatsApp. Not a slot on the page — referenced by the meta tags only. |
+
+> `gallery-5.jpg` is deliberately left free for the child photo below, if
+> permission is granted. `gallery-7` and `gallery-8` stay as artwork until more
+> photos arrive.
+
+### Filenames are forgiving
+
+The build matches on the name **without** the extension, case-insensitively.
+So `Storefront.JPG`, `storefront.jpeg` and `STOREFRONT.png` all fill the
+`storefront.jpg` slot. You do not need to get the capitalisation or the
+extension exactly right — only the name itself (`storefront`, `gallery-1`,
+`product-rideon`).
+
+HEIC is the one format that will not work; browsers cannot display it. If your
+phone saved `.HEIC`, convert to JPG first.
+
+### The complete list of slots
+
+`storefront` · `workshop` · `owner` · `gallery-1` … `gallery-8` ·
+`product-mountain` · `product-road` · `product-hybrid` · `product-kids` ·
+`product-ladies` · `product-electric` · `product-rideon` · `product-tricycle`
+
+Anything not in this list is ignored. Any slot with no file shows artwork.
 
 ## ❌ Do not use
 

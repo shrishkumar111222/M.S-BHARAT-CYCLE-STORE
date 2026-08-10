@@ -13,7 +13,7 @@ import { writeFile, readFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-import { setAvailablePhotos } from '../src/scripts/art.js';
+import { setAvailablePhotos, photoKey } from '../src/scripts/art.js';
 import { BUSINESS } from '../src/scripts/config.js';
 import { PRODUCTS, GALLERY, REVIEWS, SERVICES } from '../src/scripts/data.js';
 
@@ -295,9 +295,15 @@ const manifest = () =>
 async function scanPhotos() {
   try {
     const files = await readdir(join(ROOT, 'public/images'));
-    return new Set(files.filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f)));
+    const map = new Map();
+    for (const f of files) {
+      if (!/\.(jpe?g|png|webp|avif)$/i.test(f)) continue;
+      // First match wins, so a stray duplicate can't displace the real file.
+      if (!map.has(photoKey(f))) map.set(photoKey(f), f);
+    }
+    return map;
   } catch {
-    return new Set();
+    return new Map();
   }
 }
 
