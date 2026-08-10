@@ -19,6 +19,8 @@ export const BUSINESS = {
   // Latitude/longitude for Sherghati town centre — refine to the exact shop pin.
   lat: 24.5586,
   lng: 84.7896,
+  // Printed on the shop's signboard.
+  gstin: '10ETWPA7958G1ZC',
   mapsPlaceUrl: 'https://www.google.com/maps/place/M.S+BHARAT+CYCLE+STORE/',
   rating: 4.8,
   reviewCount: 63,

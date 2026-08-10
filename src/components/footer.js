@@ -86,7 +86,7 @@ export const footer = () => `
 
     <div class="footer__bottom">
       <p>&copy; <span data-year>${new Date().getFullYear()}</span> ${BUSINESS.name}. All rights reserved.</p>
-      <p>Sales &amp; service · ${BUSINESS.city}, ${BUSINESS.district}, ${BUSINESS.state}</p>
+      <p>GSTIN: ${BUSINESS.gstin}</p>
     </div>
   </div>
 </footer>`;

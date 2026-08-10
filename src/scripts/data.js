@@ -51,9 +51,43 @@ export const PRODUCTS = [
     ],
   },
   {
+    id: 'rideon',
+    name: 'Kids Ride-On Cars & Bikes',
+    cat: 'kidszone',
+    tag: 'Showroom Favourite',
+    photo: 'product-rideon.jpg',
+    art: 'rideon',
+    price: '₹4,500',
+    desc: 'Battery-powered jeeps, sports bikes and scooters with LED lights, music and remote control for parents. A full lit display wall of them in store.',
+    specs: [
+      ['Battery', '12V rechargeable'],
+      ['Run time', '1 – 2 hours per charge'],
+      ['Ages', '1 – 8 years, by model'],
+      ['Features', 'LED lights, music, horn'],
+      ['Parent control', 'Remote on most models'],
+    ],
+  },
+  {
+    id: 'tricycle',
+    name: 'Tricycles & Baby Walkers',
+    cat: 'kidszone',
+    tag: 'Ages 1–5',
+    photo: 'product-tricycle.jpg',
+    art: 'tricycle',
+    price: '₹1,800',
+    desc: 'Tricycles with push handles and canopies, baby walkers, prams and ride-along toys — everything for a child before their first real cycle.',
+    specs: [
+      ['Types', 'Tricycle, walker, pram'],
+      ['Push handle', 'On most tricycles'],
+      ['Canopy', 'Available'],
+      ['Seat belt', 'On handle models'],
+      ['Assembly', 'Free at store'],
+    ],
+  },
+  {
     id: 'kids',
     name: 'Kids Cycles',
-    cat: 'family',
+    cat: 'kidszone',
     tag: 'Ages 3–12',
     photo: 'product-kids.jpg',
     art: 'kids',
@@ -121,9 +155,10 @@ export const PRODUCTS = [
 ];
 
 export const PRODUCT_FILTERS = [
-  { id: 'all', label: 'All Cycles' },
+  { id: 'all', label: 'Everything' },
   { id: 'performance', label: 'Performance' },
-  { id: 'family', label: 'Family & Kids' },
+  { id: 'kidszone', label: "Kids' Zone" },
+  { id: 'family', label: 'Ladies & Family' },
   { id: 'electric', label: 'Electric' },
 ];
 
@@ -170,6 +205,11 @@ export const FEATURES = [
     icon: 'cycle',
     title: 'Bicycle Sales',
     text: 'A showroom floor of cycles from every trusted Indian brand — kids, ladies, mountain, road, hybrid and electric.',
+  },
+  {
+    icon: 'car',
+    title: 'Kids Ride-On Toys',
+    text: 'A lit display wall of battery-powered jeeps, sports bikes and scooters, plus tricycles, walkers and prams for the little ones.',
   },
   {
     icon: 'gear',

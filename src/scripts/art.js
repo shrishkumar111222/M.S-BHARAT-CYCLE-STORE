@@ -52,6 +52,8 @@ const SCENES = {
   accessories:{ from: '#1d1710', to: '#0a0704', tint: '#ffc247', motif: 'cog',  glow: '30% 30%' },
   owner:      { from: '#111722', to: '#06080f', tint: '#2e9bff', motif: 'none', glow: '50% 22%' },
   detail:     { from: '#0c1118', to: '#04060a', tint: '#8fa4c0', motif: 'cog',  glow: '55% 65%' },
+  rideon:     { from: '#241016', to: '#0b0508', tint: '#ff5a5f', motif: 'none', glow: '40% 35%' },
+  tricycle:   { from: '#0f1d1c', to: '#04090a', tint: '#2dd4bf', motif: 'none', glow: '60% 40%' },
 };
 
 let uid = 0;
