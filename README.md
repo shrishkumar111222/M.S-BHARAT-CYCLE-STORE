@@ -1,7 +1,7 @@
 # M.S BHARAT CYCLE STORE
 
-Marketing website for **M.S BHARAT CYCLE STORE** — bicycle sales and service in
-Sherghati, Gaya, Bihar.
+Marketing website for **M.S BHARAT CYCLE STORE** — bicycle sales, kids ride-on toys and service in
+Siddharth Market, Kashi Nath More, Gaya, Bihar.
 
 Dark, minimal, electric-blue. Built as static HTML, CSS and vanilla JavaScript
 with a small Node build step. No framework, no Bootstrap, no runtime
@@ -12,30 +12,39 @@ webfont, which you can self-host to remove even that).
 
 ## Read this first: the photographs
 
-**The site currently shows vector artwork, not photographs of the shop.**
+**Real photographs of the shop exist and have been reviewed — they just need
+uploading into `public/images/`.**
 
-Two separate reasons:
+**→ [`public/images/IMAGE-MAPPING.md`](public/images/IMAGE-MAPPING.md)** records
+which supplied photo belongs in which slot, which two are unusable, and which
+one needs a parent's permission first.
 
-1. **The Google Business Profile has no photos published on it.** Nothing can be
-   imported that isn't there — the Places API only returns photos that exist on
-   the listing.
-2. This build environment is blocked from reaching Google at all
-   (`google.com/maps` and `lh3.googleusercontent.com` return 403 at the egress
-   proxy), so even Street View was unavailable.
+Until the files are in the folder, every slot renders vector artwork. Nothing
+is broken; the site simply is not photographic yet.
 
-Rather than invent a storefront image, every photo slot renders artwork and is
-wired to accept the real photograph the moment one exists.
+Background on why they could not be fetched automatically: the Google Business
+Profile has no photos published on it, so the Places API had nothing to return,
+and this build environment is blocked from reaching Google at all
+(`google.com/maps` and `lh3.googleusercontent.com` return 403 at the egress
+proxy). No storefront image was ever invented to cover the gap.
 
-### The path that actually works: photograph the shop
+### Uploading without a terminal
 
-**→ [`public/images/SHOT-LIST.md`](public/images/SHOT-LIST.md)** is a shot list
-you can hand to the owner. Phone camera, about twenty minutes, framing notes for
-each shot. Business Profile photos would have been phone photos anyway — usually
-worse ones, since nobody tidies the shop first.
+1. On GitHub, open **`public/images/`**.
+2. **Add file → Upload files**, drag the photos in.
+3. Rename each to the filename from `IMAGE-MAPPING.md` before committing.
+4. Commit. The Pages workflow rebuilds and the photos are baked into the HTML.
 
-Five photos carry the whole site: the storefront, one interior, the workshop,
-the owner at work, and a wide crop of the storefront for link previews. Drop
-them into `public/images/` and run `npm run build`.
+### Still missing
+
+Two slots have no supplied photo yet, and both matter:
+
+- **`workshop.jpg`** — the Services section is built around it.
+- **`owner.jpg`** — the "Expert Guidance" card is built for it, and it is the
+  photo customers trust most.
+
+[`public/images/SHOT-LIST.md`](public/images/SHOT-LIST.md) has framing notes for
+both.
 
 ### If photos get added to the Business Profile later
 
@@ -98,7 +107,7 @@ every WhatsApp link and the schema.org markup from a single place,
 One value in that file is still approximate:
 
 ```js
-lat: 24.5586, lng: 84.7896,    // ← Sherghati town centre, not the shop's pin
+lat: 24.7914, lng: 84.9994,    // ← Kashi Nath More, not the exact shop pin
 ```
 
 Open the shop in Google Maps, right-click its pin, copy the coordinates and

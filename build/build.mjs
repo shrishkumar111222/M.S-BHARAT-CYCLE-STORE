@@ -34,10 +34,17 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 /** Public origin — update if the site moves to a custom domain. */
 const SITE_URL = process.env.SITE_URL || 'https://shrishkumar111222.github.io/m.s-bharat-cycle-store/';
 
+/** "Sherghati, Gaya" — but just "Gaya" when the town is the district town. */
+const PLACE =
+  BUSINESS.city === BUSINESS.district
+    ? `${BUSINESS.city}, ${BUSINESS.state}`
+    : `${BUSINESS.city}, ${BUSINESS.district}`;
+
 const DESCRIPTION =
-  `${BUSINESS.name} in ${BUSINESS.city}, ${BUSINESS.district} — bicycle sales, ` +
-  `repairs and servicing, genuine spare parts and accessories. Hero, Atlas, ` +
-  `Firefox, Avon, BSA, Hercules, Montra, kids and electric cycles.`;
+  `${BUSINESS.name}, ${BUSINESS.street}, ${PLACE} — bicycle sales, kids ` +
+  `ride-on cars and bikes, repairs and servicing, genuine spare parts and ` +
+  `accessories. Hero, Atlas, Firefox, Avon, BSA, Hercules, Montra, kids and ` +
+  `electric cycles.`;
 
 /* ------------------------------------------------------------------ *
  * CSS bundle
@@ -149,7 +156,7 @@ const page = () => `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>${BUSINESS.name} — Bicycle Sales &amp; Service in ${BUSINESS.city}, ${BUSINESS.district}</title>
+<title>${BUSINESS.name} — Bicycle Sales, Kids Ride-On &amp; Service in ${PLACE}</title>
 <meta name="description" content="${DESCRIPTION}">
 <meta name="theme-color" content="#04050a">
 <meta name="author" content="${BUSINESS.name}">
@@ -175,7 +182,7 @@ const page = () => `<!doctype html>
 
 <!-- Local SEO -->
 <meta name="geo.region" content="IN-BR">
-<meta name="geo.placename" content="${BUSINESS.city}, ${BUSINESS.district}">
+<meta name="geo.placename" content="${PLACE}">
 <meta name="geo.position" content="${BUSINESS.lat};${BUSINESS.lng}">
 <meta name="ICBM" content="${BUSINESS.lat}, ${BUSINESS.lng}">
 

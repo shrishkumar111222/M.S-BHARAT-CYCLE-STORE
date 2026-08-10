@@ -5,20 +5,23 @@
  */
 export const BUSINESS = {
   name: 'M.S BHARAT CYCLE STORE',
-  tagline: "Sherghati's Trusted Bicycle Destination",
+  branch: 'Gaya Ji Branch',
+  tagline: "Gaya's Trusted Bicycle Destination",
   phone: '+917277343791',
   phoneDisplay: '+91 72773 43791',
   // Country code + number, no '+' and no spaces — wa.me link format.
   whatsapp: '917277343791',
-  street: 'Main Road, Sherghati',
-  city: 'Sherghati',
+  // From the shop's own signboard and the shared market address on the
+  // neighbouring units.
+  street: 'Siddharth Market, Kashi Nath More',
+  city: 'Gaya',
   district: 'Gaya',
   state: 'Bihar',
-  postalCode: '824211',
+  postalCode: '823001',
   country: 'IN',
-  // Latitude/longitude for Sherghati town centre — refine to the exact shop pin.
-  lat: 24.5586,
-  lng: 84.7896,
+  // Kashi Nath More, Gaya — refine to the exact shop pin from Google Maps.
+  lat: 24.7914,
+  lng: 84.9994,
   // Printed on the shop's signboard.
   gstin: '10ETWPA7958G1ZC',
   mapsPlaceUrl: 'https://www.google.com/maps/place/M.S+BHARAT+CYCLE+STORE/',

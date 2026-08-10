@@ -24,7 +24,7 @@ export const reviews = () => `
     <div class="reviews__top">
       <div class="section-head" data-reveal="up">
         <span class="eyebrow">Customer Reviews</span>
-        <h2 class="text-grad">What Sherghati says<br>about us.</h2>
+        <h2 class="text-grad">What Gaya says<br>about us.</h2>
       </div>
 
       <div class="reviews__aside" data-reveal="up" data-delay="120">
