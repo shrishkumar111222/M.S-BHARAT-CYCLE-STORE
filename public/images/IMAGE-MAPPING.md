@@ -1,84 +1,95 @@
-# Photo selection — which shot goes where
+# Which photo gets which filename
 
-Assessment of the 10 photos supplied by the client. Save each **accepted**
-photo into this folder using the filename in the first column, then rebuild
-(or let the GitHub Action rebuild).
+The photos are numbered **in the order they were sent** — first message 1–5,
+second message 6–10. Each row names the one thing that makes that photo
+impossible to confuse with the others.
 
-## ✅ Use these
+## If you only do one thing
 
-| Save as | Which photo | Why |
+Upload **Photo 8** as **`storefront`**. That is the hero image, the first thing
+anyone sees. On its own it transforms the site.
+
+## The full list
+
+| # | How to recognise it | Save as |
 | --- | --- | --- |
-| `storefront.jpg` | **Night, landscape, wide — lit signboard, man seated inside, full cycle display across the front** | The hero. Landscape fits the full-bleed hero without cropping, the illuminated sign is the strongest brand moment the shop has, and the warm shelf lighting sits perfectly against the site's dark theme. |
-| `gallery-1.jpg` | **Interior, landscape — lit shelving with ride-on jeeps and bikes above, row of cycles below** | Best interior shot by a distance. No people, clean lighting, and it shows the depth of stock in one frame. |
-| `gallery-2.jpg` | **Night, landscape, with red and white balloons** | Festive, well lit. Reads as a shop that celebrates openings and festivals. |
-| `gallery-3.jpg` | **Day, portrait, straight-on — sign filling the top, ride-ons lined up outside** | Cleanest daytime shot of the signboard. |
-| `gallery-4.jpg` | **Night, portrait — lit sign, cycles in the foreground** | Good vertical for the masonry column. |
-| `gallery-6.jpg` | **Day, portrait, wider angle — whole shop front with the kids' vehicles outside** | Shows the shop in its street context. |
-| `product-rideon.jpg` | **Interior — red and blue ride-on jeeps with the light bars glowing** | The LED grilles read well as a product shot. Crop out the person standing at the right edge. |
-| `og-cover.jpg` | **Same night landscape as `storefront.jpg`, cropped to 1200×630** | The thumbnail when the link is shared on WhatsApp. Not a slot on the page — referenced by the meta tags only. |
+| 1 | Daytime, **tall**, taken from further back — cardboard boxes on the left, the photo/tour shop visible on the right | `gallery-6` |
+| 2 | Daytime, **tall**, closer in — sign fills the top, a man in a light shirt with his back to camera on the right | `gallery-3` |
+| 3 | Inside — a **red jeep and a blue jeep**, the blue one's grille lit up with coloured LEDs | `product-rideon` |
+| 4 | Night, **wide** — the sign lit up with **red and white balloons** tied across the front | `gallery-2` |
+| 5 | Inside, shelves of toy cars — has **"Thursday 2:02 PM"** and a heart printed on it | ❌ **skip** |
+| 6 | Night, tall — has **hearts, "Friday" and "MOOD"** printed across the middle | ❌ **skip** |
+| 7 | Daytime, tall — a **small child sitting in the white jeep** with an Indian flag | ⚠️ see below |
+| 8 | Night, **wide** — lit sign, a man **sitting on a stool inside** looking at his phone, **no balloons** | `storefront` ⭐ |
+| 9 | Night, **tall** — same evening scene as 8 but vertical | `gallery-4` |
+| 10 | Inside, **wide** — shelves of toy jeeps and bikes above, a row of cycles below, **nobody in the picture** | `gallery-1` |
 
-> `gallery-5.jpg` is deliberately left free for the child photo below, if
-> permission is granted. `gallery-7` and `gallery-8` stay as artwork until more
-> photos arrive.
+Then upload **Photo 8 a second time**, named **`og-cover`**. That is the small
+picture that shows up when the website link is shared on WhatsApp.
 
-### Filenames are forgiving
+## The two to skip
 
-The build matches on the name **without** the extension, case-insensitively.
-So `Storefront.JPG`, `storefront.jpeg` and `STOREFRONT.png` all fill the
-`storefront.jpg` slot. You do not need to get the capitalisation or the
-extension exactly right — only the name itself (`storefront`, `gallery-1`,
-`product-rideon`).
+Photos **5** and **6** have Snapchat stickers printed into the image — the time,
+the hearts, the word "MOOD". They cannot be removed, only cropped around, and a
+client will notice them immediately on a website that is otherwise clean.
 
-HEIC is the one format that will not work; browsers cannot display it. If your
-phone saved `.HEIC`, convert to JPG first.
+If the owner still has the originals without stickers, both are worth having.
 
-### The complete list of slots
+## Photo 7 — the child
 
-`storefront` · `workshop` · `owner` · `gallery-1` … `gallery-8` ·
-`product-mountain` · `product-road` · `product-hybrid` · `product-kids` ·
-`product-ladies` · `product-electric` · `product-rideon` · `product-tricycle`
+It is the warmest photo in the set and it sells the kids' range better than any
+product shot. But the child's face is clearly recognisable and this is a public
+website that Google will index.
 
-Anything not in this list is ignored. Any slot with no file shows artwork.
+**Ask the child's parent first.** If they say yes, upload it as `gallery-5`.
+If you cannot ask, leave it out.
 
-## ❌ Do not use
+## Names do not have to be exact
 
-| Which photo | Why not |
-| --- | --- |
-| **Interior shelf shot with "Thursday 2:02 PM" and a heart sticker** | Burned-in Snapchat/Instagram overlay. Nothing kills a premium feel faster than another app's UI printed across the image, and it cannot be removed — only cropped around, which loses the shot. The accepted landscape shelf photo shows the same display, better. |
-| **Night storefront with hearts, "Friday" and "MOOD" lettering** | Same problem, and the stickers sit dead centre over the shopfront. |
+The site matches on the **name only**. Capital letters and the file extension
+are ignored, so all of these fill the same slot:
 
-If the owner has the originals of those two **without** the stickers, they are
-worth having — the framing on both is good.
+```
+storefront.jpg    Storefront.JPG    STOREFRONT.png    storefront.jpeg
+```
 
-## ⚠️ Needs permission before publishing
+You only need the name itself right: `storefront`, `gallery-1`, `gallery-2`,
+`gallery-3`, `gallery-4`, `gallery-6`, `product-rideon`, `og-cover`.
 
-| Which photo | Issue |
-| --- | --- |
-| **Day, portrait — small child sitting in the white ride-on jeep with the Indian flag** | Genuinely the warmest, most human photo in the set, and it sells the kids' range better than any product shot. But a minor's face is clearly identifiable, and this goes on a public website indexed by search engines. **Get explicit permission from the child's parent first.** With permission, save it as `gallery-5.jpg`. Without, leave it out — no photo is worth that risk to the shop's reputation. |
+**HEIC will not work** — browsers cannot display it. If your phone saved
+`.HEIC`, convert to JPG first. On an iPhone: Settings → Camera → Formats →
+Most Compatible, or just send the photo to yourself on WhatsApp and save it
+back, which converts it to JPG automatically.
 
-## Notes for future photos
+## How to upload
 
-The set is strong on the shopfront and weak on two things the site has slots
-for:
+1. Go to **github.com/shrishkumar111222/M.S-BHARAT-CYCLE-STORE**
+2. Open the **`public`** folder, then **`images`**
+3. **Add file → Upload files**
+4. Drag the photos in
+5. Rename each one using the table above
+6. **Commit changes** at the bottom
 
-- **`workshop.jpg`** — the repair area, tools, a cycle being worked on. The
-  Services section is built around this image and currently falls back to
-  artwork. This is the most valuable gap to fill.
-- **`owner.jpg`** — the owner or a mechanic at work, looking at camera. The
-  "Expert Guidance" card is built for it, and it is the photo customers trust
-  most.
+The site rebuilds itself and the photos appear in about a minute and a half.
 
-Also worth having: a plain side-on shot of one mountain cycle, one ladies
-cycle and one kids cycle against a clear wall, for the product cards. Same
-spot, same angle for all three.
+## Slots still empty
 
-## Before committing
+No supplied photo fits these, and both are worth getting next time:
 
-Compress, or the page will load slowly on the 4G connections most of these
-customers are using:
+- **`workshop`** — the repair area, tools, a cycle being worked on. The whole
+  Services section is built around it.
+- **`owner`** — the owner or a mechanic at work, looking at the camera. This is
+  the photo customers trust most.
+
+Also useful: one mountain cycle, one ladies cycle and one kids cycle shot
+side-on against a plain wall, same spot and angle for all three, saved as
+`product-mountain`, `product-ladies` and `product-kids`.
+
+## Compress before uploading
+
+Large photos make the site slow on the mobile connections most customers use.
+Aim for under about 300 KB each — https://squoosh.app in a browser, or:
 
 ```bash
 npx @squoosh/cli --mozjpeg '{"quality":72}' -d public/images public/images/*.jpg
 ```
-
-Target under ~300 KB per file.
