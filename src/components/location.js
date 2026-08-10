@@ -13,8 +13,8 @@ export const location = () => `
       <span class="eyebrow">Store Location</span>
       <h2 class="text-grad">Come and see the cycles</h2>
       <p>
-        We are on the main road in Sherghati. Parking is easy and you are
-        welcome to test-ride before you decide.
+        We are at Siddharth Market, Kashi Nath More in Gaya. Parking is easy and
+        you are welcome to test-ride before you decide.
       </p>
     </div>
 
@@ -39,8 +39,11 @@ export const location = () => `
 
         <address class="address">
           <strong>${BUSINESS.name}</strong>
+          <span class="text-blue" style="font-size:var(--f-sm);font-weight:600">
+            ${BUSINESS.branch}
+          </span><br>
           ${BUSINESS.street},<br>
-          ${BUSINESS.district}, ${BUSINESS.state} ${BUSINESS.postalCode}
+          ${BUSINESS.city}, ${BUSINESS.state} ${BUSINESS.postalCode}
         </address>
 
         <div>

@@ -74,8 +74,9 @@ export const footer = () => `
       <div>
         <h4>Location</h4>
         <address class="address" style="font-size:var(--f-sm)">
+          <span class="text-blue">${BUSINESS.branch}</span><br>
           ${BUSINESS.street},<br>
-          ${BUSINESS.district}, ${BUSINESS.state} ${BUSINESS.postalCode}
+          ${BUSINESS.city}, ${BUSINESS.state} ${BUSINESS.postalCode}
         </address>
         <ul class="footer__links" role="list" style="margin-top:1rem">
           <li><a href="${telLink()}">${BUSINESS.phoneDisplay}</a></li>
@@ -86,7 +87,7 @@ export const footer = () => `
 
     <div class="footer__bottom">
       <p>&copy; <span data-year>${new Date().getFullYear()}</span> ${BUSINESS.name}. All rights reserved.</p>
-      <p>Sales &amp; service · ${BUSINESS.city}, ${BUSINESS.district}, ${BUSINESS.state}</p>
+      <p>GSTIN: ${BUSINESS.gstin}</p>
     </div>
   </div>
 </footer>`;

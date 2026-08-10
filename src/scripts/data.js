@@ -51,9 +51,43 @@ export const PRODUCTS = [
     ],
   },
   {
+    id: 'rideon',
+    name: 'Kids Ride-On Cars & Bikes',
+    cat: 'kidszone',
+    tag: 'Showroom Favourite',
+    photo: 'product-rideon.jpg',
+    art: 'rideon',
+    price: '₹4,500',
+    desc: 'Battery-powered jeeps, sports bikes and scooters with LED lights, music and remote control for parents. A full lit display wall of them in store.',
+    specs: [
+      ['Battery', '12V rechargeable'],
+      ['Run time', '1 – 2 hours per charge'],
+      ['Ages', '1 – 8 years, by model'],
+      ['Features', 'LED lights, music, horn'],
+      ['Parent control', 'Remote on most models'],
+    ],
+  },
+  {
+    id: 'tricycle',
+    name: 'Tricycles & Baby Walkers',
+    cat: 'kidszone',
+    tag: 'Ages 1–5',
+    photo: 'product-tricycle.jpg',
+    art: 'tricycle',
+    price: '₹1,800',
+    desc: 'Tricycles with push handles and canopies, baby walkers, prams and ride-along toys — everything for a child before their first real cycle.',
+    specs: [
+      ['Types', 'Tricycle, walker, pram'],
+      ['Push handle', 'On most tricycles'],
+      ['Canopy', 'Available'],
+      ['Seat belt', 'On handle models'],
+      ['Assembly', 'Free at store'],
+    ],
+  },
+  {
     id: 'kids',
     name: 'Kids Cycles',
-    cat: 'family',
+    cat: 'kidszone',
     tag: 'Ages 3–12',
     photo: 'product-kids.jpg',
     art: 'kids',
@@ -121,9 +155,10 @@ export const PRODUCTS = [
 ];
 
 export const PRODUCT_FILTERS = [
-  { id: 'all', label: 'All Cycles' },
+  { id: 'all', label: 'Everything' },
   { id: 'performance', label: 'Performance' },
-  { id: 'family', label: 'Family & Kids' },
+  { id: 'kidszone', label: "Kids' Zone" },
+  { id: 'family', label: 'Ladies & Family' },
   { id: 'electric', label: 'Electric' },
 ];
 
@@ -172,6 +207,11 @@ export const FEATURES = [
     text: 'A showroom floor of cycles from every trusted Indian brand — kids, ladies, mountain, road, hybrid and electric.',
   },
   {
+    icon: 'car',
+    title: 'Kids Ride-On Toys',
+    text: 'A lit display wall of battery-powered jeeps, sports bikes and scooters, plus tricycles, walkers and prams for the little ones.',
+  },
+  {
     icon: 'gear',
     title: 'Repairs & Servicing',
     text: 'An in-house workshop with the right tools. Punctures and adjustments are usually done while you wait.',
@@ -209,14 +249,14 @@ export const FEATURES = [
 export const REVIEWS = [
   {
     name: 'Rakesh Kumar',
-    when: 'Local Guide · Sherghati',
+    when: 'Local Guide · Gaya',
     stars: 5,
     demo: true,
     text: 'Bought a Hero cycle for my son here. The owner sized it properly for his height instead of just selling the biggest one. Price was fair and they assembled it free.',
   },
   {
     name: 'Amit Sharma',
-    when: 'Sherghati, Gaya',
+    when: 'Kashi Nath More, Gaya',
     stars: 5,
     demo: true,
     text: 'Went in with a broken gear cable and a wobbly wheel. Both fixed in under an hour, and he showed me exactly what was wrong before charging. Genuinely trustworthy workshop.',
@@ -226,11 +266,11 @@ export const REVIEWS = [
     when: 'Gaya',
     stars: 5,
     demo: true,
-    text: 'Best cycle shop in Sherghati. I bought a ladies cycle with basket and carrier. Very good quality and the service after purchase is excellent.',
+    text: 'Best cycle shop in Gaya. I bought a ladies cycle with basket and carrier. Very good quality and the service after purchase is excellent.',
   },
   {
     name: 'Md. Irfan',
-    when: 'Sherghati',
+    when: 'Gaya',
     stars: 4,
     demo: true,
     text: 'Good stock of spare parts — I got the exact tyre size I needed when two other shops did not have it. Reasonable rate and quick fitting.',
@@ -244,7 +284,7 @@ export const REVIEWS = [
   },
   {
     name: 'Praveen Yadav',
-    when: 'Sherghati',
+    when: 'Gaya',
     stars: 5,
     demo: true,
     text: 'Very helpful shop. They explained the difference between the models patiently and did not push me to the expensive one. Happy with my purchase.',
@@ -259,7 +299,7 @@ export const STATS = [
 ];
 
 export const GALLERY = [
-  { photo: 'gallery-1.jpg', art: 'shopfront', ratio: 'wide', caption: 'The shop on the main road, Sherghati' },
+  { photo: 'gallery-1.jpg', art: 'storefront', ratio: 'wide', caption: 'The shop at Siddharth Market, Kashi Nath More' },
   { photo: 'gallery-2.jpg', art: 'showroom', ratio: 'tall', caption: 'Showroom floor — new arrivals' },
   { photo: 'gallery-3.jpg', art: 'workshop', ratio: 'square', caption: 'The repair workshop' },
   { photo: 'gallery-4.jpg', art: 'parts', ratio: 'wide', caption: 'Genuine spare parts counter' },

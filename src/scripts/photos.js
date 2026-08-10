@@ -14,10 +14,32 @@ const BASE = 'public/images/';
 /** Resolve relative to the document so it works from a subpath on GitHub Pages. */
 const resolve = (file) => new URL(BASE + file, document.baseURI).href;
 
+/**
+ * Filename variants to try for one slot.
+ *
+ * Phone cameras save `.JPG`, people rename files on a mobile keyboard, and
+ * GitHub's uploader keeps whatever case it was given. Trying a handful of
+ * spellings turns a frustrating silent failure into a working photo.
+ */
+function variants(file) {
+  const base = file.replace(/\.[^.]+$/, '');
+  const out = [];
+  for (const b of [base, base.toUpperCase(), base.replace(/(^|[-_])(\w)/g, (m) => m.toUpperCase())]) {
+    for (const ext of ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp']) {
+      const name = `${b}.${ext}`;
+      if (!out.includes(name)) out.push(name);
+    }
+  }
+  return out;
+}
+
 function load(slot) {
   const file = slot.dataset.photo;
   if (!file || slot.dataset.photoState) return;
   slot.dataset.photoState = 'probing';
+
+  const queue = variants(file);
+  let i = 0;
 
   const probe = new Image();
   probe.decoding = 'async';
@@ -42,11 +64,16 @@ function load(slot) {
     slot.dataset.photoState = 'loaded';
   };
 
+  // Walk the variants until one loads, then stop.
   probe.onerror = () => {
+    if (i < queue.length) {
+      probe.src = resolve(queue[i++]);
+      return;
+    }
     slot.dataset.photoState = 'missing';
   };
 
-  probe.src = resolve(file);
+  probe.src = resolve(queue[i++]);
 }
 
 export function initPhotos(root = document) {

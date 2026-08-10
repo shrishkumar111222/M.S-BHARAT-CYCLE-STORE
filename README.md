@@ -1,7 +1,7 @@
 # M.S BHARAT CYCLE STORE
 
-Marketing website for **M.S BHARAT CYCLE STORE** — bicycle sales and service in
-Sherghati, Gaya, Bihar.
+Marketing website for **M.S BHARAT CYCLE STORE** — bicycle sales, kids ride-on toys and service in
+Siddharth Market, Kashi Nath More, Gaya, Bihar.
 
 Dark, minimal, electric-blue. Built as static HTML, CSS and vanilla JavaScript
 with a small Node build step. No framework, no Bootstrap, no runtime
@@ -12,30 +12,56 @@ webfont, which you can self-host to remove even that).
 
 ## Read this first: the photographs
 
-**The site currently shows vector artwork, not photographs of the shop.**
+**Real photographs of the shop exist and have been reviewed — they just need
+uploading into `public/images/`.**
 
-The build environment could not reach Google — `google.com/maps`,
-`lh3.googleusercontent.com` (where Business Profile photos are served) and the
-Indian directory sites are all blocked by the network proxy, and the Places API
-route needs an API key that wasn't available. Rather than invent a storefront
-image, every photo slot renders hand-drawn artwork and is wired to accept the
-real photograph.
+**→ [`public/images/IMAGE-MAPPING.md`](public/images/IMAGE-MAPPING.md)** records
+which supplied photo belongs in which slot, which two are unusable, and which
+one needs a parent's permission first.
 
-There are three ways to put the real photos in. Any of them works.
+Until the files are in the folder, every slot renders vector artwork. Nothing
+is broken; the site simply is not photographic yet.
 
-### Option A — let GitHub fetch them (no terminal needed)
+Background on why they could not be fetched automatically: the Google Business
+Profile has no photos published on it, so the Places API had nothing to return,
+and this build environment is blocked from reaching Google at all
+(`google.com/maps` and `lh3.googleusercontent.com` return 403 at the egress
+proxy). No storefront image was ever invented to cover the gap.
 
-GitHub's runners can reach Google even though the build environment could not.
+### Uploading without a terminal
 
-1. Get a Google Maps API key (see Option B for the three-step setup).
+1. On GitHub, open **`public/images/`**.
+2. **Add file → Upload files**, drag the photos in.
+3. Rename each to the filename from `IMAGE-MAPPING.md` before committing.
+4. Commit. The Pages workflow rebuilds and the photos are baked into the HTML.
+
+### Still missing
+
+Two slots have no supplied photo yet, and both matter:
+
+- **`workshop.jpg`** — the Services section is built around it.
+- **`owner.jpg`** — the "Expert Guidance" card is built for it, and it is the
+  photo customers trust most.
+
+[`public/images/SHOT-LIST.md`](public/images/SHOT-LIST.md) has framing notes for
+both.
+
+### If photos get added to the Business Profile later
+
+Two ways to import them automatically.
+
+**Via GitHub, no terminal needed.** GitHub's runners can reach Google even
+though this build environment could not.
+
+1. Get a Google Maps API key (see below for the three-step setup).
 2. This repo → **Settings → Secrets and variables → Actions → New repository
    secret**. Name it `GOOGLE_MAPS_API_KEY`, paste the key.
 3. **Actions → "Fetch real Google Business photos" → Run workflow.**
 
-It downloads the shop's published Business Profile photos, rebuilds the site
-with them baked in, and commits them. The run summary lists every file it got.
+It downloads whatever the listing has, rebuilds with the photos baked in, and
+commits them. The run summary lists every file it got.
 
-### Option B — automatic, from your own machine
+**Or from your own machine:**
 
 ```bash
 # One-time: console.cloud.google.com → new project
@@ -53,13 +79,11 @@ can correct `src/scripts/config.js` from real data.
 Place Photos requests are billed per call; one run is a couple of dozen calls,
 well inside Google's free monthly credit.
 
-### Option C — manual
+### Filenames and sizes
 
-Download the photos from the Business Profile and save them into
-`public/images/` using the filenames in
-[`public/images/PHOTO-GUIDE.md`](public/images/PHOTO-GUIDE.md), then
-`npm run build`. The storefront photo goes in as `storefront.jpg` — it becomes
-the hero background.
+[`public/images/PHOTO-GUIDE.md`](public/images/PHOTO-GUIDE.md) lists every slot,
+the filename it expects, the ideal pixel size and how to compress before
+committing. `storefront.jpg` is the hero background and matters most.
 
 ### How the slots behave
 
@@ -83,7 +107,7 @@ every WhatsApp link and the schema.org markup from a single place,
 One value in that file is still approximate:
 
 ```js
-lat: 24.5586, lng: 84.7896,    // ← Sherghati town centre, not the shop's pin
+lat: 24.7914, lng: 84.9994,    // ← Kashi Nath More, not the exact shop pin
 ```
 
 Open the shop in Google Maps, right-click its pin, copy the coordinates and

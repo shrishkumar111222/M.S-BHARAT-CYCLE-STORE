@@ -9,7 +9,7 @@ export const hero = () => `
     ${photoSlot({
       photo: 'storefront.jpg',
       art: 'storefront',
-      alt: `Shop front of ${BUSINESS.name} in Sherghati, Gaya`,
+      alt: `Shop front of ${BUSINESS.name} at Siddharth Market, Kashi Nath More, Gaya`,
       eager: true,
     })}
   </div>
@@ -60,7 +60,7 @@ export const hero = () => `
       </div>
       <div class="hero__fact">
         <dt>Est.</dt>
-        <dd>${BUSINESS.established}<small>Serving Sherghati</small></dd>
+        <dd>${BUSINESS.established}<small>Serving Gaya</small></dd>
       </div>
       <div class="hero__fact">
         <dt>Brands</dt>

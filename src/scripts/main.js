@@ -36,8 +36,19 @@ const readJSON = (id) => {
   }
 };
 
+/**
+ * Dev mode shows the expected filename on each empty photo slot. Off by
+ * default so a live demo never exposes "gallery-1.jpg" on hover.
+ * Enable locally, or anywhere by appending ?dev to the URL.
+ */
+function devMode() {
+  const local = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+  return local || new URLSearchParams(window.location.search).has('dev');
+}
+
 function boot() {
   document.documentElement.classList.add('js');
+  if (devMode()) document.documentElement.classList.add('dev');
 
   initPhotos();
   initLines();

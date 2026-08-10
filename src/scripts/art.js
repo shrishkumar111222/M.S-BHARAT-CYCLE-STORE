@@ -52,6 +52,8 @@ const SCENES = {
   accessories:{ from: '#1d1710', to: '#0a0704', tint: '#ffc247', motif: 'cog',  glow: '30% 30%' },
   owner:      { from: '#111722', to: '#06080f', tint: '#2e9bff', motif: 'none', glow: '50% 22%' },
   detail:     { from: '#0c1118', to: '#04060a', tint: '#8fa4c0', motif: 'cog',  glow: '55% 65%' },
+  rideon:     { from: '#241016', to: '#0b0508', tint: '#ff5a5f', motif: 'none', glow: '40% 35%' },
+  tricycle:   { from: '#0f1d1c', to: '#04090a', tint: '#2dd4bf', motif: 'none', glow: '60% 40%' },
 };
 
 let uid = 0;
@@ -108,14 +110,22 @@ export function artSVG(key = 'showroom', label = '') {
 }
 
 /**
- * The build calls this with the set of filenames that actually exist in
- * public/images/, so present photos are emitted as real <img> tags in the
- * static HTML instead of being probed at runtime.
+ * The build calls this with a Map of the photographs that actually exist in
+ * public/images/, keyed by lowercase basename without extension, so present
+ * photos are emitted as real <img> tags instead of probed at runtime.
+ *
+ * Keying this way means `Storefront.JPG` or `storefront.png` all satisfy the
+ * `storefront.jpg` slot. Phones capitalise extensions and people rename files
+ * on a mobile keyboard; none of that should silently break the site.
  */
 let available = null;
-export const setAvailablePhotos = (set) => {
-  available = set;
+export const setAvailablePhotos = (map) => {
+  available = map;
 };
+
+/** "Storefront.JPG" → "storefront" */
+export const photoKey = (file) =>
+  file.replace(/\.[^.]+$/, '').trim().toLowerCase();
 
 /**
  * Full markup for a photo slot.
@@ -134,12 +144,13 @@ export const setAvailablePhotos = (set) => {
  */
 export function photoSlot({ photo, art, alt = '', eager = false, className = '' }) {
   const safeAlt = alt.replace(/"/g, '&quot;');
-  const exists = available?.has(photo);
+  const actual = available?.get(photoKey(photo));
 
-  if (exists) {
+  if (actual) {
     return `
 <div class="photo has-photo ${className}" data-art="${art}">
-  <img class="photo__img" src="public/images/${photo}" alt="${safeAlt}"
+  <img class="photo__img" src="public/images/${encodeURIComponent(actual)}"
+       alt="${safeAlt}"
        decoding="async" loading="${eager ? 'eager' : 'lazy'}"${
          eager ? ' fetchpriority="high"' : ''
        }>

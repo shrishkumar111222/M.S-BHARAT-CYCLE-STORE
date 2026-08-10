@@ -19,7 +19,7 @@ export const features = () => `
       <p>
         Buying a cycle is the easy part. What matters afterwards is whether
         someone nearby can service it, stock the right part and give you a
-        straight answer. That is the shop we have built in Sherghati.
+        straight answer. That is the shop we have built in Gaya.
       </p>
     </div>
 

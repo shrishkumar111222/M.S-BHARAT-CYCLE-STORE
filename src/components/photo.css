@@ -58,8 +58,14 @@
   );
 }
 
-/* The small "add your photo" hint, only on placeholder slots */
+/* Filename hint on empty slots.
+   Hidden by default so a client demo never shows "gallery-1.jpg" on hover.
+   Visible on localhost, or on any URL with ?dev — see main.js. */
 .photo__hint {
+  display: none;
+}
+
+.dev .photo__hint {
   position: absolute;
   z-index: 3;
   left: 0.75rem;
@@ -80,7 +86,8 @@
 }
 
 /* Only surfaces on hover, so it never spoils the first impression */
-.photo:hover .photo__hint {
+.dev .photo:hover .photo__hint {
+  display: block;
   opacity: 1;
 }
 
